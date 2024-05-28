@@ -109,3 +109,12 @@ button {
   grid-column: 2/3;
 }
 
+.todo-container{
+    padding: 25px;
+}
+
+/* todo div stack */
+.todo{
+    display: flex;
+    gap: 15px;
+}
