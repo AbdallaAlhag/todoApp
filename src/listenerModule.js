@@ -1,4 +1,7 @@
 // main.js
+import arrayModule from "./todo";
+import { loadPage } from './page.js'
+
 export function dialogListener(){
     document.addEventListener('DOMContentLoaded', () => {
     const dialog = document.getElementById('form-dialog');
@@ -16,18 +19,13 @@ export function dialogListener(){
   
     submitButton.addEventListener('click', (event) => {
       event.preventDefault(); // Prevent the form from submitting in the traditional way
-  
-      const title = document.getElementById('title').value;
-      const description = document.getElementById('desc').value;
-      const date = document.getElementById('due').value;
-    //   const priority = document.getElementById('item-priority').value;
-  
-      // Handle the form data here (e.g., add it to an array, display it on the page, etc.)
-      console.log('Form Data:', { name, description, date, priority });
+      console.log('subtmit button working')
+      formListener();
   
       // Clear the form and close the dialog
       document.querySelector('form').reset();
       dialog.close();
+      loadPage();
     });
   
     // Optional: Close the dialog when clicking outside of it
@@ -40,5 +38,21 @@ export function dialogListener(){
       }
     });
   });
-  
+};
+
+
+function formListener(){
+  const dialog = document.querySelector('dialog');
+  const form = document.querySelector('form');
+
+  const formData = new FormData(form);
+  const title = formData.get('title');
+  const description = formData.get('desc')
+  const date = formData.get('date');
+  const priority = formData.get('priority');
+
+  arrayModule.addToArray(title, description, date,priority);
+  let array = arrayModule.getArray();
+  console.log(array);
+  console.log('checking if dialog works');
 }
