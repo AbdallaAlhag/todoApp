@@ -4,7 +4,7 @@
   --border-color: #222;
   --primary-background: #fca5a5;
   --background-light: #fef2f2;
-  --background-grey: #f0f0f0;
+  --background-grey: #e7e5e4;
 }
 
 *,
@@ -97,6 +97,7 @@ button {
 
 .side-bar button {
   font-size: 2.5rem;
+  background-color: var(--background-grey);
 }
 
 #add-button {
@@ -133,7 +134,6 @@ dialog {
   grid-column: 1/2;
   background-color: var(--background-grey);
   border-right: 1px solid black;
-
   padding: 10px;
 }
 
@@ -150,13 +150,11 @@ dialog {
 }
 
 .dialog-content #desc,
-.dialog-content #title{
-    border: none;
-    outline: none;
-    padding: 5px;
+.dialog-content #title {
+  border: none;
+  outline: none;
+  padding: 5px;
 }
-
-
 
 .dialog-content #desc {
   height: 150px;
@@ -172,12 +170,53 @@ dialog {
   grid-column: 2/3;
 }
 
-.todo-container {
-  padding: 25px;
+.grid-container {
+  display: grid;
+  grid-template-rows: 1fr;
+  font-size: 16px;
+  gap: 10px;
+  margin: 15px;
 }
 
 /* todo div stack */
-.todo {
+.grid {
   display: flex;
+  justify-content: flex-end;
   gap: 15px;
+  background-color: var(--background-grey);
+  border-left: 3px solid;
+  border-left-color: green;
+  padding: 5px;
+  transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.grid button{
+    background-color: var(--background-grey);
+}
+
+.grid button:hover{
+    fill: green;
+}
+#detail {
+    border: 1px solid green;
+    padding: 5px;
+    border-radius: 15%;
+    color: green;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
+
+}
+
+#detail:hover{
+    color: white;
+    background-color: green;
+}
+
+#title {
+  margin-right: auto;
+}
+
+.grid img {
+  width: 20px;
+  height: 20px;
+  align-self: center;
 }

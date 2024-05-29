@@ -1,6 +1,6 @@
 // main.js
 import arrayModule from "./todo";
-import { loadPage } from './page.js'
+import { loadPage } from './create.js'
 
 export function dialogListener(){
     document.addEventListener('DOMContentLoaded', () => {
