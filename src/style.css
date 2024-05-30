@@ -137,26 +137,27 @@ dialog {
   padding: 10px;
 }
 
-.dialog-content {
+.dialog-content,
+#edit-dialog {
   grid-column: 2/3;
   padding: 10px;
 }
 
-.dialog-content #desc,
-.dialog-content #title,
-.dialog-content #bottom-line {
+#desc,
+#title,
+#bottom-line {
   width: 95%;
   border-radius: 10px;
 }
 
-.dialog-content #desc,
-.dialog-content #title {
+#desc,
+#title {
   border: none;
   outline: none;
   padding: 5px;
 }
 
-.dialog-content #desc {
+#desc {
   height: 150px;
 }
 #form-priority {
@@ -190,6 +191,10 @@ dialog {
   transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 
+.grid:hover{
+  box-shadow: 5px 10px 30px #847f7f;
+}
+
 .grid button{
     background-color: var(--background-grey);
 }
@@ -211,7 +216,7 @@ dialog {
     background-color: green;
 }
 
-#title {
+#_title {
   margin-right: auto;
 }
 

@@ -1,7 +1,8 @@
 // main.js
-import arrayModule from "./todo";
-import { loadPage } from './create.js'
+import arrayModule from "./createTodo.js";
+import { loadPage } from './createPage.js'
 
+// Listens to the add botton 
 export function dialogListener(){
     document.addEventListener('DOMContentLoaded', () => {
     const dialog = document.getElementById('form-dialog');
@@ -56,3 +57,4 @@ function formListener(){
   console.log(array);
   console.log('checking if dialog works');
 }
+

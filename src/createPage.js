@@ -1,16 +1,20 @@
-import arrayModule from "./todo";
+import arrayModule from "./createTodo";
 import trash from "./img/trash.svg";
 import edit from "./img/edit.svg";
-const array = arrayModule.getArray();
+import { todoListener } from "./todoListenerModule";
+
+
 
 function createPage(topic = true, date = true) {
   const content_container = document.createElement("div");
   content_container.classList.add("grid-container");
-
-  array.forEach((element) => {
+  
+  const array = arrayModule.getArray();
+  array.forEach((element,index) => {
     // if condition to load base on what page we want
     const grid = document.createElement("div");
     grid.classList.add("grid");
+    grid.setAttribute('index', index);
     createTodo(grid, element);
     grid.style;
     content_container.appendChild(grid);
@@ -18,7 +22,7 @@ function createPage(topic = true, date = true) {
   return content_container;
 }
 
-// Parent = grid, elment = class inside the array which we are looping through
+// Parent = grid, elment = todo object (which is the class we created) inside the array which we are looping through
 function createTodo(parent, element) {
   const { checkbox, label, detailButton, editButton, removeButton } = createHelper();
 
@@ -27,11 +31,11 @@ function createTodo(parent, element) {
 
   for (const key in element) {
     // check if current propery belongs to our element instead of properties inherited from prototype chain
-    if (key == "description" || key == "priority") {
+    if (key == '_description' || key == '_priority') {
       continue;
     }
     if (Object.prototype.hasOwnProperty.call(element, key)) {
-      if (key == 'dueDate'){
+      if (key == '_dueDate'){
         parent.appendChild(detailButton);
       }
       const div = document.createElement("div");
@@ -42,9 +46,9 @@ function createTodo(parent, element) {
   }
 
   parent.style.borderLeftColor =
-    element["priority"] == "High"
+    element.priority == "High"
       ? "red"
-      : element["priority"] == "Medium"
+      : element.priority == "Medium"
       ? "orange"
       : "green";
 
@@ -69,11 +73,11 @@ function createHelper() {
   editButton.id = 'edit';
   const editImg = document.createElement("img");
   editImg.src = `${edit}`;
-  editImg.alt = "edit image";
+  editImg.alt = "edit";
   editButton.appendChild(editImg)
 
   const removeButton = document.createElement('button');
-  editButton.id = 'remove';
+  removeButton.id = 'remove';
   const trashImg = document.createElement("img");
   trashImg.src = `${trash}`;
   trashImg.alt = "trashcan";
@@ -95,4 +99,5 @@ export function loadPage() {
   const content = document.getElementById("content");
   content.textContent = "";
   content.appendChild(createPage(true, true));
+  todoListener();
 }
