@@ -4,29 +4,31 @@ import arrayModule from "./createTodo";
 
 // Listens to buttons on the todo, including detail, edit, remove
 export function todoListener() {
-    // document.addEventListener("DOMContentLoaded", () => {
     const attachListeners = () => {
-        const detail = document.querySelectorAll("#detail");
-        const edit = document.querySelectorAll("#edit");
-        const remove = document.querySelectorAll("#remove");
-        console.log(edit, remove, detail)
+        const detail = document.querySelectorAll(".detail");
+        const edit = document.querySelectorAll(".edit");
+        const remove = document.querySelectorAll(".remove");
 
         detail.forEach((detailbtn) => {
-            detailbtn.addEventListener("click", () => {
+            console.log(detail);
+            detailbtn.addEventListener("click", (event) => {
+                event.stopPropagation(); // Stop event propagation to prevent triggering other event listeners
                 const grid = detailbtn.parentNode;
                 createDetailDialog(grid);
             });
         });
 
         edit.forEach((editBtn) => {
-            editBtn.addEventListener("click", () => {
+            editBtn.addEventListener("click", (event) => {
+                event.stopPropagation();
                 const grid = editBtn.parentNode;
                 createEdit(grid);
             });
         });
 
         remove.forEach((removeBtn) => {
-            removeBtn.addEventListener("click", () => {
+            removeBtn.addEventListener("click", (event) => {
+                event.stopPropagation();
                 const grid = removeBtn.parentNode;
                 removeGrid(grid);
             });
@@ -36,7 +38,8 @@ export function todoListener() {
 
 
     attachListeners(); // Directly call attachListeners to attach listeners
-    document.addEventListener("DOMContentLoaded", attachListeners);
+    // document.addEventListener("DOMContentLoaded", attachListeners);
+
 
 }
 
@@ -78,7 +81,6 @@ function createEdit(grid) {
     // need grid.index value
     const array = arrayModule.getArray();
     const gridIndex = grid.getAttribute("index");
-    console.log(gridIndex);
     //   console.log(array[grid.index].title);
     createDialog();
 

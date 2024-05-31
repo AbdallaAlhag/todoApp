@@ -67,17 +67,17 @@ function createHelper() {
 
   const detailButton = document.createElement('button');
   detailButton.textContent = 'Detail';
-  detailButton.id = 'detail';
+  detailButton.className = 'detail';
 
   const editButton = document.createElement('button');
-  editButton.id = 'edit';
+  editButton.className = 'edit';
   const editImg = document.createElement("img");
   editImg.src = `${edit}`;
   editImg.alt = "edit";
   editButton.appendChild(editImg)
 
   const removeButton = document.createElement('button');
-  removeButton.id = 'remove';
+  removeButton.className = 'remove';
   const trashImg = document.createElement("img");
   trashImg.src = `${trash}`;
   trashImg.alt = "trashcan";

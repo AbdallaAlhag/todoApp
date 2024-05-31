@@ -137,6 +137,23 @@ dialog {
   padding: 10px;
 }
 
+.dialog-content button,
+ #submit-button,
+ #cancel-button{
+  font-size: 12px;
+  border: 1px solid green;
+  background-color: white;
+  padding: 5px;
+  border-radius: 10%;
+  color: green;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
+}
+
+.dialog-content button:hover {
+  color: white;
+  background-color: green;
+}
+
 .dialog-content,
 #edit-dialog {
   grid-column: 2/3;
@@ -160,11 +177,82 @@ dialog {
 #desc {
   height: 150px;
 }
+
+/* Radio input type */
 #form-priority {
   display: flex;
-  gap: 5px;
+  gap: 10px;
 }
 
+#form-priority input[type="radio"] {
+  display: none;
+}
+
+#form-priority label {
+  font-size: 12px;
+  display: inline-block;
+  padding: 2px 2px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#form-priority input[type="radio"]:checked + label {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+#form-priority label:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* each button low, medium, high */
+
+#form-priority input[type="radio"]#high + label {
+  border-color: red;
+  color: red;
+}
+
+#form-priority input[type="radio"]:checked#high + label {
+  background-color: red;
+}
+
+#form-priority input[type="radio"]#medium + label {
+  border-color: orange;
+  color: orange;
+}
+
+#form-priority input[type="radio"]:checked#medium + label {
+  background-color: orange;
+}
+
+#form-priority input[type="radio"]#low + label {
+  border-color: green;
+  color: green;
+}
+
+#form-priority input[type="radio"]:checked#low + label {
+  background-color: green;
+}
+
+#form-priority input[type="radio"]#low + label:hover {
+  background-color: green;
+  color: #ffffff;
+}
+
+#form-priority input[type="radio"]#medium + label:hover {
+  background-color: orange;
+  color: #ffffff;
+}
+
+#form-priority input[type="radio"]#high + label:hover {
+  background-color: red;
+  color: #ffffff;
+}
 /* content */
 #content {
   background: #fef2f2;
@@ -191,29 +279,25 @@ dialog {
   transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 
-.grid:hover{
+.grid:hover {
   box-shadow: 5px 10px 30px #847f7f;
 }
 
-.grid button{
-    background-color: var(--background-grey);
+.grid button {
+  background-color: var(--background-grey);
 }
 
-.grid button:hover{
-    fill: green;
-}
-#detail {
-    border: 1px solid green;
-    padding: 5px;
-    border-radius: 15%;
-    color: green;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
-
+.detail {
+  border: 1px solid green;
+  padding: 5px;
+  border-radius: 15%;
+  color: green;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for background color and text color */
 }
 
-#detail:hover{
-    color: white;
-    background-color: green;
+.detail:hover {
+  color: white;
+  background-color: green;
 }
 
 #_title {
