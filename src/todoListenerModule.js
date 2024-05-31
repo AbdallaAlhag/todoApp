@@ -10,7 +10,6 @@ export function todoListener() {
         const remove = document.querySelectorAll(".remove");
 
         detail.forEach((detailbtn) => {
-            console.log(detail);
             detailbtn.addEventListener("click", (event) => {
                 event.stopPropagation(); // Stop event propagation to prevent triggering other event listeners
                 const grid = detailbtn.parentNode;

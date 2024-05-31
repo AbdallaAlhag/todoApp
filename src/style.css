@@ -219,6 +219,7 @@ dialog {
 
 #form-priority input[type="radio"]:checked#high + label {
   background-color: red;
+  color: #ffffff;
 }
 
 #form-priority input[type="radio"]#medium + label {
@@ -228,6 +229,7 @@ dialog {
 
 #form-priority input[type="radio"]:checked#medium + label {
   background-color: orange;
+  color: #ffffff;
 }
 
 #form-priority input[type="radio"]#low + label {
@@ -237,6 +239,7 @@ dialog {
 
 #form-priority input[type="radio"]:checked#low + label {
   background-color: green;
+  color: #ffffff;
 }
 
 #form-priority input[type="radio"]#low + label:hover {

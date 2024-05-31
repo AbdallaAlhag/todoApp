@@ -20,13 +20,12 @@ export function dialogListener(){
   
     submitButton.addEventListener('click', (event) => {
       event.preventDefault(); // Prevent the form from submitting in the traditional way
-      console.log('subtmit button working')
       formListener();
   
       // Clear the form and close the dialog
       document.querySelector('form').reset();
       dialog.close();
-      loadPage();
+      loadPage(true);
     });
   
     // Optional: Close the dialog when clicking outside of it
@@ -54,7 +53,5 @@ function formListener(){
 
   arrayModule.addToArray(title, description, date,priority);
   let array = arrayModule.getArray();
-  console.log(array);
-  console.log('checking if dialog works');
 }
 

@@ -2,22 +2,28 @@ import arrayModule from "./createTodo";
 import trash from "./img/trash.svg";
 import edit from "./img/edit.svg";
 import { todoListener } from "./todoListenerModule";
+import { parseISO, differenceInDays } from "date-fns";
 
 
 
-function createPage(topic = true, date = true) {
+function createPage(option) {
   const content_container = document.createElement("div");
   content_container.classList.add("grid-container");
-  
+
   const array = arrayModule.getArray();
-  array.forEach((element,index) => {
+  array.forEach((element, index) => {
     // if condition to load base on what page we want
     const grid = document.createElement("div");
     grid.classList.add("grid");
     grid.setAttribute('index', index);
     createTodo(grid, element);
     grid.style;
-    content_container.appendChild(grid);
+
+
+    if (checkDate(option, element.dueDate)) {
+      content_container.appendChild(grid);
+    }
+
   });
   return content_container;
 }
@@ -35,7 +41,7 @@ function createTodo(parent, element) {
       continue;
     }
     if (Object.prototype.hasOwnProperty.call(element, key)) {
-      if (key == '_dueDate'){
+      if (key == '_dueDate') {
         parent.appendChild(detailButton);
       }
       const div = document.createElement("div");
@@ -49,8 +55,8 @@ function createTodo(parent, element) {
     element.priority == "High"
       ? "red"
       : element.priority == "Medium"
-      ? "orange"
-      : "green";
+        ? "orange"
+        : "green";
 
   // const trashImg = document.createElement("img");
   // trashImg.src = `${trash}`;
@@ -95,9 +101,31 @@ function createHelper() {
   return { checkbox, label, detailButton, editButton, removeButton };
 }
 
-export function loadPage() {
+function checkDate(option, curDay) {
+  if (option == true) {
+    return true;
+  }
+  const currentDay = parseISO(curDay)
+  const today = new Date();
+  const diff = differenceInDays(today, currentDay)
+  if (option === 'today'){
+    if (diff == 0){
+      return true;
+    }
+  } else if (option === 'week'){
+    if (diff <= 7 && diff >= 0){
+      return true;
+    }
+  } else{
+    return false;
+  }
+
+}
+
+export function loadPage(option) {
   const content = document.getElementById("content");
   content.textContent = "";
-  content.appendChild(createPage(true, true));
+  content.appendChild(createPage(option));
   todoListener();
 }
+
