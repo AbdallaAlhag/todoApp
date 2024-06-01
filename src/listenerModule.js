@@ -8,8 +8,9 @@ export function dialogListener(){
     const dialog = document.getElementById('form-dialog');
     const openDialogButton = document.getElementById('add-button');
     const cancelButton = document.getElementById('cancel-button');
-    const submitButton = document.getElementById('submit-button');
-  
+    // const submitButton = document.get('submit-button');
+    const submitButton = document.querySelector('#submit-button');
+
     openDialogButton.addEventListener('click', () => {
       dialog.showModal();
     });
@@ -41,7 +42,7 @@ export function dialogListener(){
 };
 
 
-function formListener(){
+export function formListener(){
   const dialog = document.querySelector('dialog');
   const form = document.querySelector('form');
 

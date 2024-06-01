@@ -138,7 +138,7 @@ dialog {
 }
 
 .dialog-content button,
- #submit-button,
+ .submit-button,
  #cancel-button{
   font-size: 12px;
   border: 1px solid green;
@@ -176,6 +176,20 @@ dialog {
 
 #desc {
   height: 150px;
+}
+
+#bottom-line{
+  display: flex;
+  justify-content: flex-start;
+}
+
+#bottom-line .submit-button,
+#bottom-line #cancel-button{
+  margin-left: auto;
+} 
+
+textarea {
+  resize: none;
 }
 
 /* Radio input type */

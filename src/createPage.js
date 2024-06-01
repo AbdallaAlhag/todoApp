@@ -2,7 +2,9 @@ import arrayModule from "./createTodo";
 import trash from "./img/trash.svg";
 import edit from "./img/edit.svg";
 import { todoListener } from "./todoListenerModule";
-import { parseISO, differenceInDays } from "date-fns";
+import { format,parseISO, differenceInDays } from "date-fns";
+import { enUS } from 'date-fns/locale';
+
 
 
 
@@ -17,8 +19,6 @@ function createPage(option) {
     grid.classList.add("grid");
     grid.setAttribute('index', index);
     createTodo(grid, element);
-    grid.style;
-
 
     if (checkDate(option, element.dueDate)) {
       content_container.appendChild(grid);
@@ -46,7 +46,16 @@ function createTodo(parent, element) {
       }
       const div = document.createElement("div");
       div.setAttribute("id", `${key}`);
-      div.textContent = `${element[key]}`;
+
+      // formated date
+      if (key == '_dueDate'){
+        const date = parseISO(element[key])
+        const formattedDate = format(date, "MMMM do", { locale: enUS });
+        div.textContent = `${formattedDate}`;
+      } else {
+        div.textContent = `${element[key]}`;
+      }
+      
       parent.appendChild(div);
     }
   }
