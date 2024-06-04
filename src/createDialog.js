@@ -1,3 +1,4 @@
+import { editFormListener } from './todoListenerModule'
 // Create the parent container div with class 'dialog-content'
 
 // arr = [todo class, todo class, ...etc]
@@ -52,31 +53,47 @@ export function createDialog(todoObject) {
     dateInput.setAttribute("required", "true");
 
     // Create the priority radio buttons
-    const priorityLabel = document.createElement("form");
+    const priorityLabel = document.createElement("div");
     priorityLabel.textContent = "Priority:";
     priorityLabel.id = 'form-priority';
-    const lowRadio = createRadioButton("low", "low", "low");
-    const mediumRadio = createRadioButton("medium", "medium", "medium");
-    const highRadio = createRadioButton("high", "high", "high");
+    priorityLabel.name = 'priority';
+    const lowRadio = createRadioButton("Low", "Low", "Low", todoObject.priority);
+    const mediumRadio = createRadioButton("Medium", "Medium", "Medium", todoObject.priority);
+    const highRadio = createRadioButton("High", "High", "High", todoObject.priority);
     priorityLabel.appendChild(lowRadio);
     priorityLabel.appendChild(mediumRadio);
     priorityLabel.appendChild(highRadio);
 
-    function createRadioButton(id, value, labelText) {
+    // Attach event listener to handle clicks on radio buttons
+    // const radioLabels = document.querySelectorAll('#form-priority .radio-label');
+    // console.log(radioLabels);
+    // radioLabels.forEach(label => {
+    //     label.addEventListener('click', function () {
+    //         const radio = this.querySelector('input[type="radio"]');
+    //         radio.checked = true;
+    //         console.log("Radio button checked:", radio.value);
+    //     });
+    // });
+    function createRadioButton(id, value, labelText, currentPriority) {
+        const label = document.createElement("label");
+        label.classList.add('radio-label');
+        label.setAttribute("id", id);
+    
         const radio = document.createElement("input");
         radio.setAttribute("type", "radio");
         radio.setAttribute("id", id);
         radio.setAttribute("name", "priority");
         radio.setAttribute("value", value);
-        const label = document.createElement("label");
-        label.setAttribute("for", id);
-        label.textContent = labelText;
-        const br = document.createElement("br");
-        const container = document.createElement("div");
-        container.appendChild(radio);
-        container.appendChild(label);
-        container.appendChild(br);
-        return container;
+        if (currentPriority === value) {
+            radio.checked = true;
+        }
+    
+        const labelTextNode = document.createTextNode(labelText);
+    
+        label.appendChild(radio);
+        label.appendChild(labelTextNode);
+    
+        return label;
     }
 
     // Create the submit button
@@ -84,7 +101,7 @@ export function createDialog(todoObject) {
     // submitButton.setAttribute("type", "submit");
     submitButton.classList.add("submit-button");
     submitButton.id = "edit-submit-button"
-    submitButton.textContent = "Add To Do";
+    submitButton.textContent = "Update To-Do";
 
     // // Create the cancel button
     // const cancelButton = document.createElement("button");
@@ -105,11 +122,11 @@ export function createDialog(todoObject) {
     bottomLine.appendChild(submitButton);
     // bottomLine.appendChild(cancelButton);
     formElement.appendChild(bottomLine);
-    
+
     //   formElement.appendChild(lowRadio);
     //   formElement.appendChild(mediumRadio);
     //   formElement.appendChild(highRadio);
-    
+
     // formElement.appendChild(priorityLabel);
     // formElement.appendChild(submitButton);
     // formElement.appendChild(cancelButton);
@@ -122,4 +139,14 @@ export function createDialog(todoObject) {
 
     // Append the dialog element to the document body
     document.body.appendChild(formDialog);
+
+    formDialog.showModal();
+
+    formElement.addEventListener('submit', (event) => {
+        event.preventDefault();
+        editFormListener(todoObject);
+        formDialog.remove();
+        formDialog.close();
+    });
+
 }

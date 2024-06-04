@@ -23,7 +23,9 @@
                 <button class="project">Work</button>
             </nav>
             <button>Notes</button>
-            <button id="add-button">+(add button)</button>
+            <button id="add-button">
+                <img src="./img/add.png" alt="Add Button">
+            </button>
             <dialog id="form-dialog">
                 <form method="dialog">
                     <div class="dialog-container">
@@ -56,15 +58,26 @@
                             </div>
                             <div id="bottom-line">
                                 <form id="form-priority">Priority: 
-                                    <input type="radio" id="low" name="priority" value="low" required>
+                                    <!-- <input type="radio" id="Low" name="priority" value="Low" required>
                                     <label for="low" >low</label><br>
-                                    <input type="radio" id="medium" name="priority" value="medium" >
+                                    <input type="radio" id="Medium" name="priority" value="medium" >
                                     <label for="medium">medium</label><br>
-                                    <input type="radio" id="high" name="priority" value="high">
-                                    <label for="high">high</label>
+                                    <input type="radio" id="High" name="priority" value="high">
+                                    <label for="high">high</label> -->
+                                    <label class="radio-label" id="Low">
+                                        Low
+                                        <input type="radio" id="Low" name="priority" value="Low" required>
+                                    </label>
+                                    <label class="radio-label" id="Medium">
+                                        Medium
+                                        <input type="radio" id="Medium" name="priority" value="medium" >
+                                    </label>
+                                    <label class="radio-label" id="High">
+                                        High
+                                        <input type="radio" id="High" name="priority" value="high">
+                                    </label>
                                 </form>
                                 <button class="submit-button" id="submit-button">Add To Do</button>
-                            <button id="cancel-button">Cancel</button>
                             </div>
                             
                         </div>

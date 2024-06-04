@@ -59,9 +59,9 @@ function createDetailDialog(grid) {
     dialog.innerHTML = `
         <form method="dialog">
             <h1>${array[gridIndex].title}</h1>
-            <p><h3>Priority: </h3>${array[gridIndex].priority}</p>
-            <p><h3>Due Date:</h3>${formattedDate}</p>
-            <p><h3>Details:</h3>${array[gridIndex].description}</p>
+            <h3>Priority: </h3><p>${array[gridIndex].priority}</p>
+            <h3>Due Date:</h3><p>${formattedDate}</p>
+            <h3>Details:</h3><p>${array[gridIndex].description}</p>
         </form>
     `;
     document.body.appendChild(dialog);
@@ -91,22 +91,23 @@ function createEdit(grid) {
     //   console.log(array[grid.index].title);
     createDialog(array[gridIndex]);
 
+
     // Optional: Close the dialog when clicking outside of it
     const editDialog = document.querySelector("#edit-dialog");
-    editDialog.showModal();
+    // editDialog.showModal();
 
     // const submitButton = document.getElementsByClassName('submit-button');
     const submitButton = document.querySelector('#edit-submit-button');
 
-    submitButton.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent the form from submitting in the traditional way
-        editFormListener(array[gridIndex])
+    // submitButton.addEventListener('click', (event) => {
+    //     event.preventDefault(); // Prevent the form from submitting in the traditional way
+    //     editFormListener(array[gridIndex])
 
-        // Clear the form and close the dialog
-        // document.querySelector('form').reset();
-        editDialog.close();
-        loadPage(true);
-    });
+    //     // Clear the form and close the dialog
+    //     // document.querySelector('form').reset();
+    //     editDialog.close();
+    //     loadPage(true);
+    // });
 
     editDialog.addEventListener("click", (event) => {
         const rect = editDialog.getBoundingClientRect();
@@ -125,25 +126,20 @@ function createEdit(grid) {
 function removeGrid(grid) {
     const gridIndex = grid.getAttribute("index");
     arrayModule.remove(gridIndex);
-    loadPage();
+    loadPage(true);
 }
 
-function editFormListener(todoObject){
-    console.log('hi')
-    const dialog = document.querySelector('dialog');
-    const form = document.querySelector('form');
-  
-    const formData = new FormData(form);
-    const formTitle = formData.get('title');
-    const formDescription = formData.get('desc')
-    const formDate = formData.get('date');
-    const formPriority = formData.get('priority');
-  
-    // arrayModule.addToArray(title, description, date,priority);
-    todoObject.title = formTitle;
-    todoObject.description = formDescription;
-    todoObject.dueDate = formDate;
-    todoObject.Priority = formPriority;
+export function editFormListener(todoObject){
+    const dialog = document.querySelector('#edit-dialog');
+    const form = dialog.querySelector('form');
+    const priorityForm = dialog.querySelector('#form-priority');
+    const selectedPriority = priorityForm.querySelector('input[name="priority"]:checked');
 
-    console.log(todoObject)
+    const formData = new FormData(form);
+    todoObject.title = formData.get('title');
+    todoObject.description = formData.get('desc');
+    todoObject.dueDate = formData.get('date');
+    todoObject.priority = selectedPriority.id;
+
+    loadPage(true);
 }

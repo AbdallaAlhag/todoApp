@@ -7,18 +7,13 @@ export function dialogListener(){
     document.addEventListener('DOMContentLoaded', () => {
     const dialog = document.getElementById('form-dialog');
     const openDialogButton = document.getElementById('add-button');
-    const cancelButton = document.getElementById('cancel-button');
-    // const submitButton = document.get('submit-button');
     const submitButton = document.querySelector('#submit-button');
 
     openDialogButton.addEventListener('click', () => {
       dialog.showModal();
     });
   
-    cancelButton.addEventListener('click', () => {
-      dialog.close();
-    });
-  
+
     submitButton.addEventListener('click', (event) => {
       event.preventDefault(); // Prevent the form from submitting in the traditional way
       formListener();

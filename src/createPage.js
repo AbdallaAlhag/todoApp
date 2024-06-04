@@ -2,7 +2,7 @@ import arrayModule from "./createTodo";
 import trash from "./img/trash.svg";
 import edit from "./img/edit.svg";
 import { todoListener } from "./todoListenerModule";
-import { format,parseISO, differenceInDays } from "date-fns";
+import { format,parseISO, differenceInDays, isValid  } from "date-fns";
 import { enUS } from 'date-fns/locale';
 
 
@@ -48,10 +48,27 @@ function createTodo(parent, element) {
       div.setAttribute("id", `${key}`);
 
       // formated date
-      if (key == '_dueDate'){
-        const date = parseISO(element[key])
-        const formattedDate = format(date, "MMMM do", { locale: enUS });
-        div.textContent = `${formattedDate}`;
+      // if (key == '_dueDate'){
+      //   const date = parseISO(element[key])
+      //   const formattedDate = format(date, "MMMM do", { locale: enUS });
+      //   div.textContent = `${formattedDate}`;
+      // } else {
+      //   div.textContent = `${element[key]}`;
+      // }
+      if (key === '_dueDate') {
+        try {
+          const date = parseISO(element[key]);
+          if (isValid(date)) {
+            const formattedDate = format(date, "MMMM do", { locale: enUS });
+            div.textContent = `${formattedDate}`;
+          } else {
+            console.error('Invalid date:', element[key]);
+            div.textContent = 'Invalid date';
+          }
+        } catch (error) {
+          console.error('Error parsing date:', error);
+          div.textContent = 'Error parsing date';
+        }
       } else {
         div.textContent = `${element[key]}`;
       }

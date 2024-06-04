@@ -69,17 +69,18 @@ button {
   grid-column: 1/3;
   grid-row: 1;
   background-color: var(--primary-background);
+  border-bottom: 1px solid grey;
 }
 
 /* side bar */
 .side-bar {
   grid-column: 1/2;
   background-color: var(--background-grey);
-  border-right: 1px solid black;
+  border-right: 1px solid grey;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 25px;
+  padding: 45px;
   gap: 10px;
 }
 
@@ -226,49 +227,56 @@ textarea {
 
 /* each button low, medium, high */
 
-#form-priority input[type="radio"]#high + label {
+
+#form-priority #High{
   border-color: red;
   color: red;
 }
 
-#form-priority input[type="radio"]:checked#high + label {
+#form-priority input[type="radio"]#High:checked + label {
   background-color: red;
   color: #ffffff;
 }
 
-#form-priority input[type="radio"]#medium + label {
+#form-priority #Medium {
   border-color: orange;
   color: orange;
 }
 
-#form-priority input[type="radio"]:checked#medium + label {
+#form-priority input[name="priority"]#Medium:checked{
   background-color: orange;
   color: #ffffff;
 }
 
-#form-priority input[type="radio"]#low + label {
+#form-priority #Low {
   border-color: green;
   color: green;
 }
 
-#form-priority input[type="radio"]:checked#low + label {
+#form-priority input[type="radio"]#Low:checked + label {
   background-color: green;
   color: #ffffff;
 }
 
-#form-priority input[type="radio"]#low + label:hover {
+#form-priority .radio-label#Low:hover {
   background-color: green;
   color: #ffffff;
 }
 
-#form-priority input[type="radio"]#medium + label:hover {
+#form-priority .radio-label#Medium:hover {
   background-color: orange;
   color: #ffffff;
 }
 
-#form-priority input[type="radio"]#high + label:hover {
+#form-priority .radio-label#High:hover {
   background-color: red;
   color: #ffffff;
+}
+
+/* Detail Dialog */
+#detail-dialog{
+  padding: 10px;
+  background-color: var(--background-grey);
 }
 /* content */
 #content {
