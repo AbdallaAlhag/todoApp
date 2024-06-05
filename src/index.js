@@ -7,9 +7,9 @@ import { createWeek } from './week.js';
 import { createNote } from './notes.js';
 
 arrayModule.addToArray('Complete Project', 'Finish the Odin Project task', '2024-05-31', 'Low');
-arrayModule.addToArray('Work on css', 'Add Icon', '2024-05-27', 'Medium');
-arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-24', 'High');
-arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-18', 'High');
+// arrayModule.addToArray('Work on css', 'Add Icon', '2024-05-27', 'Medium');
+// arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-24', 'High');
+// arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-18', 'High');
 
 noteModule.addToArray('Finish Project', 'Finish loading pages');
 noteModule.addToArray('Finish Project', 'Finish loading pages');

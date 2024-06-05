@@ -78,7 +78,7 @@ export function createDialog(todoObject) {
         const label = document.createElement("label");
         label.classList.add('radio-label');
         label.setAttribute("id", id);
-    
+
         const radio = document.createElement("input");
         radio.setAttribute("type", "radio");
         radio.setAttribute("id", id);
@@ -87,12 +87,12 @@ export function createDialog(todoObject) {
         if (currentPriority === value) {
             radio.checked = true;
         }
-    
+
         const labelTextNode = document.createTextNode(labelText);
-    
+
         label.appendChild(radio);
         label.appendChild(labelTextNode);
-    
+
         return label;
     }
 
@@ -149,4 +149,8 @@ export function createDialog(todoObject) {
         formDialog.close();
     });
 
+}
+
+export function createNotesDialog(noteObj) {
+    console.log('todo');
 }

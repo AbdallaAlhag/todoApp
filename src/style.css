@@ -75,7 +75,8 @@ button {
 }
 
 /* side bar */
-.side-bar {
+.side-bar, 
+.dialog-side-bar {
   grid-column: 1/2;
   background-color: var(--background-grey);
   border-right: 1px solid grey;

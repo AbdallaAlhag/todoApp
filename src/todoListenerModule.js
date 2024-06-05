@@ -50,14 +50,16 @@ function createDetailDialog(grid) {
     let gridIndex = grid.getAttribute("index");
 
     // Formated date
-    const date = parseISO(array[gridIndex].dueDate);
+    // const date = parseISO(array[gridIndex].dueDate);
     const dialog = document.createElement("dialog");
     dialog.id = "detail-dialog";
+    let formattedDate = 'Invalid date';
     
     try {
-        const date = parseISO(element[key]);
+        // const date = parseISO(element['key']);
+        const date = parseISO(array[gridIndex].dueDate);
         if (isValid(date)) {
-            const formattedDate = format(date, 'MMMM do, yyyy', { locale: enUS });
+            formattedDate = format(date, 'MMMM do, yyyy', { locale: enUS });
         } else {
             formattedDate = 'Invalid date';
         }
