@@ -70,6 +70,8 @@ button {
   grid-row: 1;
   background-color: var(--primary-background);
   border-bottom: 1px solid grey;
+  padding: 15px;
+  color: white;
 }
 
 /* side bar */
@@ -103,6 +105,7 @@ button {
 
 #add-button {
   margin-top: auto;
+  width: 25%;
 }
 
 /* ADD modal */
@@ -139,8 +142,8 @@ dialog {
 }
 
 .dialog-content button,
- .submit-button,
- #cancel-button{
+.submit-button,
+#cancel-button {
   font-size: 12px;
   border: 1px solid green;
   background-color: white;
@@ -179,15 +182,15 @@ dialog {
   height: 150px;
 }
 
-#bottom-line{
+#bottom-line {
   display: flex;
   justify-content: flex-start;
 }
 
 #bottom-line .submit-button,
-#bottom-line #cancel-button{
+#bottom-line #cancel-button {
   margin-left: auto;
-} 
+}
 
 textarea {
   resize: none;
@@ -227,8 +230,7 @@ textarea {
 
 /* each button low, medium, high */
 
-
-#form-priority #High{
+#form-priority #High {
   border-color: red;
   color: red;
 }
@@ -243,7 +245,7 @@ textarea {
   color: orange;
 }
 
-#form-priority input[name="priority"]#Medium:checked{
+#form-priority input[name="priority"]#Medium:checked {
   background-color: orange;
   color: #ffffff;
 }
@@ -274,7 +276,7 @@ textarea {
 }
 
 /* Detail Dialog */
-#detail-dialog{
+#detail-dialog {
   padding: 10px;
   background-color: var(--background-grey);
 }
@@ -334,3 +336,86 @@ textarea {
   height: 20px;
   align-self: center;
 }
+
+#add-button-img {
+  width: 100%;
+  background-color: var(--primary-background);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+#add-button-img:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+#add-button-img:active {
+  transform: translateY(5px);
+  box-shadow: 0 5px 7px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+
+/* NOTES  */
+.note-container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 30%));
+  padding: 25px;
+  gap: 15px
+}
+
+.note-grid{
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-grey);
+  padding: 5px;
+  transition: all 0.3s ease; /* Transition for smooth animation */
+  border-radius: 5px;
+
+  overflow-y: auto; /* Enable vertical scrollbar when content exceeds max-height */
+  min-height: 100px; /* Minimum height of the container */
+  max-height: none; /* Maximum height of the container */
+
+}
+
+@keyframes pop {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.note-grid:hover{
+  box-shadow: 2px 2px 10px grey; /* Add a subtle focus shadow */
+  animation: pop 0.3s ease-in-out;
+}
+
+.note-grid textarea{
+  border: none;
+  background-color: var(--background-grey);
+  width: 100%;
+
+  resize: None; /* Allow vertical resizing only */
+  box-sizing: border-box;
+  overflow: hidden;
+  box-sizing: border-box
+}
+
+.note-grid textarea:focus {
+  outline: none; /* Remove default outline */
+  border: 1px solid transparent; /* Make border transparent */
+}
+
+.note-grid button{
+  align-self: flex-end;
+  background-color: var(--background-grey);
+}
+
+
+

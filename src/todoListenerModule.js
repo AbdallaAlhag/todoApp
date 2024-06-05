@@ -1,7 +1,7 @@
 import { createDialog } from "./createDialog";
 import { loadPage } from "./createPage";
 import arrayModule from "./createTodo";
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, isValid } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
 // Listens to buttons on the todo, including detail, edit, remove
@@ -51,19 +51,22 @@ function createDetailDialog(grid) {
 
     // Formated date
     const date = parseISO(array[gridIndex].dueDate);
-    const formattedDate = format(date, 'MMMM do, yyyy', { locale: enUS });
-
-
     const dialog = document.createElement("dialog");
     dialog.id = "detail-dialog";
-    dialog.innerHTML = `
-        <form method="dialog">
-            <h1>${array[gridIndex].title}</h1>
-            <h3>Priority: </h3><p>${array[gridIndex].priority}</p>
-            <h3>Due Date:</h3><p>${formattedDate}</p>
-            <h3>Details:</h3><p>${array[gridIndex].description}</p>
-        </form>
-    `;
+    
+    try {
+        const date = parseISO(element[key]);
+        if (isValid(date)) {
+            const formattedDate = format(date, 'MMMM do, yyyy', { locale: enUS });
+        } else {
+            formattedDate = 'Invalid date';
+        }
+        dialog.innerHTML = createDialogHTML(array[gridIndex].title, array[gridIndex].priority, formattedDate, array[gridIndex].description);
+    } catch (error) {
+        console.error('Error parsing date:', error);
+        dialog.innerHTML = createDialogHTML('Empty Task', 'Low by Default', 'Invalid date', "Empty Description")
+    }
+
     document.body.appendChild(dialog);
 
     // Optional: Close the dialog when clicking outside of it
@@ -81,6 +84,17 @@ function createDetailDialog(grid) {
     });
 
     dialog.showModal();
+}
+
+function createDialogHTML(title, priority, formattedDate, description) {
+    return `
+        <form method="dialog">
+            <h1>${title}</h1>
+            <h3>Priority: </h3><p>${priority}</p>
+            <h3>Due Date:</h3><p>${formattedDate}</p>
+            <h3>Details:</h3><p>${description}</p>
+        </form>
+    `;
 }
 
 function createEdit(grid) {
@@ -129,7 +143,7 @@ function removeGrid(grid) {
     loadPage(true);
 }
 
-export function editFormListener(todoObject){
+export function editFormListener(todoObject) {
     const dialog = document.querySelector('#edit-dialog');
     const form = dialog.querySelector('form');
     const priorityForm = dialog.querySelector('#form-priority');

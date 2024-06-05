@@ -4,6 +4,7 @@ import edit from "./img/edit.svg";
 import { todoListener } from "./todoListenerModule";
 import { format,parseISO, differenceInDays, isValid  } from "date-fns";
 import { enUS } from 'date-fns/locale';
+import addImage from './img/add.png'
 
 
 
@@ -72,7 +73,7 @@ function createTodo(parent, element) {
       } else {
         div.textContent = `${element[key]}`;
       }
-      
+
       parent.appendChild(div);
     }
   }
@@ -123,6 +124,10 @@ function createHelper() {
 
   const label = document.createElement("label");
   label.htmlFor = "myCheckbox"; // Set the 'for' attribute to match the checkbox's ID
+
+
+  const addBtn = document.querySelector('#add-button-img');
+  addBtn.src = addImage;  
 
   return { checkbox, label, detailButton, editButton, removeButton };
 }
