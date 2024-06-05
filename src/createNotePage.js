@@ -25,7 +25,10 @@ function createNote(parent, element,index) {
     removeButton.textContent = 'X';
 
     removeButton.addEventListener('click', function () {
-        // detelete Noote
+        // detelete Note
+        noteModule.remove(index)
+        parent.remove();
+        console.log(noteModule.getArray())
     });
     parent.appendChild(removeButton);
 
@@ -34,22 +37,22 @@ function createNote(parent, element,index) {
         const textarea = document.createElement('textarea');
 
         textarea.setAttribute('id', `textarea-${key}-${index}`);
-        textarea.classList.add('textarea-class');
+        textarea.classList.add(`textarea-class-${key}-${index}`);
         textarea.value = element[key];
         
+        parent.appendChild(textarea);
 
         textarea.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
 
-            const pa = this.parentElement;
+            const pa = document.getElementById(`note-grid-${index}`);
             console.log(pa)
+            console.log(this.style.height)
             // pa.style.height = 'auto';
             pa.style.height = this.style.height + 'px';
         });
 
-        parent.appendChild(textarea);
-        
     }
 
 

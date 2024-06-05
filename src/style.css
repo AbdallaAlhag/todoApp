@@ -359,10 +359,16 @@ textarea {
 /* NOTES  */
 .note-container{
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 30%));
+  height: 90vh;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 30%)); */
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
   padding: 25px;
-  gap: 15px
+  gap: 15px;
+  overflow-y: auto;
 }
 
 .note-grid{
@@ -372,9 +378,9 @@ textarea {
   padding: 5px;
   transition: all 0.3s ease; /* Transition for smooth animation */
   border-radius: 5px;
-
+  width: 250px;
   overflow-y: auto; /* Enable vertical scrollbar when content exceeds max-height */
-  min-height: 100px; /* Minimum height of the container */
+  min-height: 150px; /* Minimum height of the container */
   max-height: none; /* Maximum height of the container */
 
 }

@@ -13,6 +13,11 @@ arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-18', 'H
 
 noteModule.addToArray('Finish Project', 'Finish loading pages');
 noteModule.addToArray('Finish Project', 'Finish loading pages');
+noteModule.addToArray('Finish Project', 'Finish loading pages');
+noteModule.addToArray('Finish Project', 'Finish loading pages');
+noteModule.addToArray('Finish Project', 'Finish loading pages');
+noteModule.addToArray('Finish Project', 'Finish loading pages');
+noteModule.addToArray('Finish Project', 'Finish loading pages');
 
 // let array = arrayModule.getArray();;
 // console.log(array);
