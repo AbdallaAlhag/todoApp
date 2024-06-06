@@ -4,9 +4,8 @@ import edit from "./img/edit.svg";
 import { todoListener } from "./todoListenerModule";
 import { format,parseISO, differenceInDays, isValid  } from "date-fns";
 import { enUS } from 'date-fns/locale';
-import addImage from './img/add.png'
-
-
+import addImage from './img/add.png';
+import noteIcon from './img/notePad.svg'
 
 
 function createPage(option) {
@@ -128,6 +127,9 @@ function createHelper() {
 
   const addBtn = document.querySelector('#add-button-img');
   addBtn.src = addImage;  
+
+  const notePad = document.querySelector('#notepad-icon');
+  notePad.src = noteIcon;
 
   return { checkbox, label, detailButton, editButton, removeButton };
 }

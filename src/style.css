@@ -72,6 +72,13 @@ button {
   border-bottom: 1px solid grey;
   padding: 15px;
   color: white;
+  display: flex;
+}
+
+.header #notepad-icon {
+  height: 2.4em;
+  width: 2.4em;
+  margin-left: 0;
 }
 
 /* side bar */
@@ -90,13 +97,12 @@ button {
 .dialog-side-bar button{
   background: var(--background-grey);
   font-size: 20px;
-  padding-left: 10%;
+  /* padding-left: 10%; */
 }
 
 .side-bar button, 
 .dialog-side-bar button {
   display: flex;
-  align-items: center;
   flex-direction: row-reverse;
   transition: transform 0.3s ease-in-out;
 }
@@ -109,13 +115,23 @@ button {
 
 .side-bar button .icon-img {
   height: 30px;
+  width: 30px;
 }
 
 .dialog-side-bar button .icon-img{
-  height: 25%;
+  height: 25px;
+  width: 30px;
 }
 
+#form-dialog .dialog-container .dialog-content input[type='date']{
+  color: green;
+  border:1px solid green;
+}
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(26%) sepia(98%) saturate(1284%) hue-rotate(93deg) brightness(97%) contrast(107%);
+  /* Add other styling properties here as needed */
+}
 .date,
 .topic {
   display: flex;
@@ -194,6 +210,12 @@ dialog {
   background-color: green;
 }
 
+
+
+.edit img:hover,
+.remove img:hover{
+  filter: invert(18%) sepia(97%) saturate(4130%) hue-rotate(110deg) brightness(97%) contrast(103%);
+}
 .dialog-content,
 #edit-dialog {
   grid-column: 2/3;
@@ -232,16 +254,17 @@ textarea {
   resize: none;
 }
 
-/* Radio input type */
 #form-priority {
   display: flex;
   gap: 10px;
 }
 
+/* Hide default radio buttons */
 #form-priority input[type="radio"] {
   display: none;
 }
 
+/* Style for labels */
 #form-priority label {
   font-size: 12px;
   display: inline-block;
@@ -254,18 +277,22 @@ textarea {
   transition: background-color 0.3s, color 0.3s;
 }
 
-#form-priority input[type="radio"]:checked + label {
+/* Style for checked labels */
+/* #form-priority input[type="radio"]:checked + label {
   background-color: #000000;
   color: #ffffff;
+} */
+
+/* Style for hovered labels */
+
+#form-priority .radio-label#Low:hover{
+  background-color: green;
+  color: white;
 }
 
-#form-priority label:hover {
-  background-color: #000000;
-  color: #ffffff;
-}
+/* Specific styles for each priority level */
 
-/* each button low, medium, high */
-
+/* High priority */
 #form-priority #High {
   border-color: red;
   color: red;
@@ -276,28 +303,19 @@ textarea {
   color: #ffffff;
 }
 
+#form-priority .radio-label#High:hover {
+  background-color: red;
+  color: #ffffff;
+}
+
+/* Medium priority */
 #form-priority #Medium {
   border-color: orange;
   color: orange;
 }
 
-#form-priority input[name="priority"]#Medium:checked {
+#form-priority input[type="radio"]#Medium:checked{
   background-color: orange;
-  color: #ffffff;
-}
-
-#form-priority #Low {
-  border-color: green;
-  color: green;
-}
-
-#form-priority input[type="radio"]#Low:checked + label {
-  background-color: green;
-  color: #ffffff;
-}
-
-#form-priority .radio-label#Low:hover {
-  background-color: green;
   color: #ffffff;
 }
 
@@ -306,8 +324,14 @@ textarea {
   color: #ffffff;
 }
 
-#form-priority .radio-label#High:hover {
-  background-color: red;
+/* Low priority */
+#form-priority #Low {
+  border-color: green;
+  color: green;
+}
+
+#form-priority input[type="radio"]#Low:checked + label {
+  background-color: green;
   color: #ffffff;
 }
 

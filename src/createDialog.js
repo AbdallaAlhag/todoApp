@@ -75,6 +75,7 @@ export function createDialog(todoObject) {
     //     });
     // });
     function createRadioButton(id, value, labelText, currentPriority) {
+        const div = document.createElement('div');
         const label = document.createElement("label");
         label.classList.add('radio-label');
         label.setAttribute("id", id);
@@ -89,11 +90,11 @@ export function createDialog(todoObject) {
         }
 
         const labelTextNode = document.createTextNode(labelText);
-
-        label.appendChild(radio);
+        div.appendChild(label);
+        div.appendChild(radio);
         label.appendChild(labelTextNode);
 
-        return label;
+        return div;
     }
 
     // Create the submit button

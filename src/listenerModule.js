@@ -296,6 +296,7 @@ function createTodoDialogContent(dialog, form, dialogContainer, dialogContent, d
   ];
 
   priorities.forEach(priority => {
+    const div = document.createElement('div');
     const label = document.createElement('label');
     label.classList.add('radio-label');
     label.setAttribute('id', priority.id);
@@ -308,9 +309,11 @@ function createTodoDialogContent(dialog, form, dialogContainer, dialogContent, d
     input.setAttribute('value', priority.value);
     if (priority.id === 'Low') input.required = true;
 
-    label.appendChild(input);
-    priorityForm.appendChild(label);
+    div.appendChild(input);
+    div.appendChild(label)
+    priorityForm.appendChild(div);
   });
+
 
   // Submit button
   const submitButton = document.createElement('button');
@@ -353,6 +356,26 @@ function dialogListenerHelper() {
     dialog.close();
     loadPage(true);
   });
+
+    // const radioButtons = dialog.querySelectorAll('input[type="radio"][name="priority"]');
+    // radioButtons.forEach(radioButton => {
+    //   console.log(radioButtons)
+    //     radioButton.addEventListener('change', function() {
+    //       console.log('ccc')
+    //         // Remove 'checked' class from all labels within the dialog
+    //         const rr = dialog.querySelectorAll('input[type="radio"][name="priority"]');
+    //         rr.forEach(label => {
+    //             rr.classList.remove('checked');
+    //         });
+
+    //         // Add 'checked' class to the selected label
+    //         if (this.checked) {
+    //           console.log('CCCC')
+    //             const label = this.parentElement.querySelector('label');
+    //             label.classList.add('checked');
+    //         }
+    //     });
+    // });
 
 
   // Optional: Close the dialog when clicking outside of it
