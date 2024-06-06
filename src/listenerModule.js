@@ -2,6 +2,7 @@
 import arrayModule from "./createTodo.js";
 import { loadPage } from './createPage.js'
 import noteModule from "./createNotes.js";
+import lines from './img/vertical-lines.png';
 
 // Listens to the add botton 
 export function dialogListener() {
@@ -9,43 +10,70 @@ export function dialogListener() {
   document.addEventListener('DOMContentLoaded', () => {
     const dialog = document.getElementById('form-dialog');
     const openDialogButton = document.getElementById('add-button');
-    let submitButton = document.querySelectorAll('#submit-button');
-    console.log(submitButton.name)
+    const submitButton = document.querySelector('#submit-button');
 
     openDialogButton.addEventListener('click', () => {
-      dialog.showModal();
-    });
-
-
-    submitButton.forEach((btn)=> {
-      btn.addEventListener('click', (event) => {
-        event.preventDefault(); // Prevent the form from submitting in the traditional way
-        formListener();
-
-        // Clear the form and close the dialog
-        document.querySelector('form').reset();
-        dialog.close();
-        loadPage(true);
-      });
-    });
-
-
-
-
-    // Optional: Close the dialog when clicking outside of it
-    dialog.addEventListener('click', (event) => {
-      const rect = dialog.getBoundingClientRect();
-      const isInDialog = event.clientX >= rect.left && event.clientX <= rect.right &&
-        event.clientY >= rect.top && event.clientY <= rect.bottom;
-      if (!isInDialog) {
-        dialog.close();
+      if (!dialog.open) {
+        dialog.showModal();
       }
     });
+
+    const sideBar = document.querySelector('.side-bar')
+    // OKAY IM JUST GOING TO PLACE THE SIDE BAR BUTTONS LISTENER HERE LOL
+    sideBar.querySelectorAll('button').forEach(button => {
+      // if (button.id === 'add-button'){console.log(button.id)}
+      
+      if (button.id !== 'add-button') {
+        button.addEventListener('click', function () {
+
+          sideBar.querySelectorAll('button').forEach(btn => {
+            if (btn.id !== 'add-button') {
+              btn.classList.remove('clicked');
+              const icon = btn.querySelector('img');
+              if (icon) {
+                icon.remove();
+              }
+            }
+
+          });
+
+          this.classList.toggle('clicked');
+          if (!this.querySelector('img')) {
+            const icon = document.createElement('img');
+            icon.classList.add('icon-img');
+            icon.src = lines;
+            icon.alt = 'Vertical lines'
+            this.appendChild(icon);
+          }
+        });
+      }
+
+    });
+
+    //   submitButton.addEventListener('click', (event) => {
+    //     event.preventDefault(); // Prevent the form from submitting in the traditional way
+    //     formListener();
+
+    //     // Clear the form and close the dialog
+    //     document.querySelector('form').reset();
+    //     dialog.close();
+    //     loadPage(true);
+    //   });
+
+    //   // Optional: Close the dialog when clicking outside of it
+    //   dialog.addEventListener('click', (event) => {
+    //     const rect = dialog.getBoundingClientRect();
+    //     const isInDialog = event.clientX >= rect.left && event.clientX <= rect.right &&
+    //       event.clientY >= rect.top && event.clientY <= rect.bottom;
+    //     if (!isInDialog) {
+    //       dialog.close();
+    //     }
+    //   });
   });
 };
 
 
-export function formListener(option) {
+export function formListener() {
   const dialog = document.querySelector('dialog');
   const form = document.querySelector('form');
 
@@ -55,9 +83,9 @@ export function formListener(option) {
   const date = formData.get('date');
   const priority = formData.get('priority');
 
-  if (!date && !priority) {
+  if (!date && !priority && title && description) {
     noteModule.addToArray(title, description);
-  } else {
+  } else if (date && priority && title && description) {
     arrayModule.addToArray(title, description, date, priority);
   }
 }
@@ -83,17 +111,55 @@ function createDialog() {
   h1.textContent = 'Create a new...';
   dialogHeader.appendChild(h1);
 
+  const removeButton = document.createElement('button');
+  removeButton.setAttribute('id', 'exit-button');
+  removeButton.textContent = 'X';
+
+  removeButton.addEventListener('click', function () {
+    // detelete Note
+    if (dialog.open) {
+      dialog.close();
+    }
+  });
+  dialogHeader.appendChild(removeButton);
+
   // Create dialog-side-bar
   const dialogSideBar = document.createElement('div');
   dialogSideBar.classList.add('dialog-side-bar');
 
   const todoButton = document.createElement('button');
-  todoButton.textContent = 'To Do';
+  dialogSideBar.classList.add('dialog-side-bar');
+  todoButton.textContent = 'ToDo';
   dialogSideBar.appendChild(todoButton);
 
   const noteButton = document.createElement('button');
   noteButton.textContent = 'Note';
   dialogSideBar.appendChild(noteButton);
+
+  dialogSideBar.querySelectorAll('button').forEach(button => {
+
+    button.addEventListener('click', function () {
+
+      dialogSideBar.querySelectorAll('button').forEach(btn => {
+        btn.classList.remove('clicked');
+        const icon = btn.querySelector('img');
+        if (icon) {
+          icon.remove();
+        }
+      });
+
+
+      this.classList.toggle('clicked');
+      if (!this.querySelector('img')) {
+        const icon = document.createElement('img');
+        icon.classList.add('icon-img');
+        icon.src = lines;
+        icon.alt = 'Vertical lines'
+        this.appendChild(icon);
+      }
+    });
+
+  });
 
 
   // Create dialog-content
@@ -173,6 +239,7 @@ function createNoteDialogContent(dialog, form, dialogContainer, dialogContent, d
 
   // Append dialog to body
   document.body.appendChild(dialog);
+  dialogListenerHelper();
 }
 
 // TO DO DIALOG CONTENT
@@ -252,6 +319,7 @@ function createTodoDialogContent(dialog, form, dialogContainer, dialogContent, d
   submitButton.setAttribute('name', 'todo');
   submitButton.textContent = 'Add To Do';
 
+
   // Append elements
   priorityDiv.appendChild(priorityForm);
   priorityDiv.appendChild(submitButton);
@@ -268,4 +336,34 @@ function createTodoDialogContent(dialog, form, dialogContainer, dialogContent, d
 
   // Append dialog to body
   document.body.appendChild(dialog);
+  dialogListenerHelper();
 }
+
+function dialogListenerHelper() {
+
+  const dialog = document.getElementById('form-dialog');
+  const submitButton = document.querySelector('#submit-button');
+
+  submitButton.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the form from submitting in the traditional way
+    formListener();
+
+    // Clear the form and close the dialog
+    document.querySelector('form').reset();
+    dialog.close();
+    loadPage(true);
+  });
+
+
+  // Optional: Close the dialog when clicking outside of it
+  // lol only works with default dialog
+  dialog.addEventListener('click', (event) => {
+    const rect = dialog.getBoundingClientRect();
+    const isInDialog = event.clientX >= rect.left && event.clientX <= rect.right &&
+      event.clientY >= rect.top && event.clientY <= rect.bottom;
+    if (!isInDialog) {
+      dialog.close();
+    }
+  });
+
+};

@@ -52,10 +52,7 @@ function createNote(parent, element,index) {
             // pa.style.height = 'auto';
             pa.style.height = this.style.height + 'px';
         });
-
     }
-
-
 }
 
 
