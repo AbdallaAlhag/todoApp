@@ -6,10 +6,10 @@ import { createToday } from './today.js';
 import { createWeek } from './week.js';
 import { createNote } from './notes.js';
 
-arrayModule.addToArray('Complete Project', 'Finish the Odin Project task', '2024-05-31', 'Low');
-// arrayModule.addToArray('Work on css', 'Add Icon', '2024-05-27', 'Medium');
-// arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-24', 'High');
-// arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-05-18', 'High');
+arrayModule.addToArray('Complete Project', 'Finish the Odin Project task', '2024-06-06', 'Low');
+arrayModule.addToArray('Work on css', 'Add Icon', '2024-06-06', 'Medium');
+arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-06-12', 'High');
+arrayModule.addToArray('Pay bills', 'Pay phone bill from At&t', '2024-06-12', 'High');
 
 noteModule.addToArray('Finish Project', 'Finish loading pages');
 noteModule.addToArray('Finish Project', 'Finish loading pages');
@@ -19,7 +19,7 @@ noteModule.addToArray('Finish Project', 'Finish loading pages');
 noteModule.addToArray('Finish Project', 'Finish loading pages');
 noteModule.addToArray('Finish Project', 'Finish loading pages');
 
-// let array = arrayModule.getArray();;
+// let array = arrayModule.getArray();
 // console.log(array);
 // console.log('Hello World');
 // const today = new Date();

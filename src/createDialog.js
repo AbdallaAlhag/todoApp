@@ -64,16 +64,7 @@ export function createDialog(todoObject) {
     priorityLabel.appendChild(mediumRadio);
     priorityLabel.appendChild(highRadio);
 
-    // Attach event listener to handle clicks on radio buttons
-    // const radioLabels = document.querySelectorAll('#form-priority .radio-label');
-    // console.log(radioLabels);
-    // radioLabels.forEach(label => {
-    //     label.addEventListener('click', function () {
-    //         const radio = this.querySelector('input[type="radio"]');
-    //         radio.checked = true;
-    //         console.log("Radio button checked:", radio.value);
-    //     });
-    // });
+
     function createRadioButton(id, value, labelText, currentPriority) {
         const div = document.createElement('div');
         const label = document.createElement("label");

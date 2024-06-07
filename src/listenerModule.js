@@ -19,10 +19,18 @@ export function dialogListener() {
     });
 
     const sideBar = document.querySelector('.side-bar')
+
+    const home = document.querySelector('#home')
+    const icon = document.createElement('img');
+    icon.classList.add('icon-img');
+    icon.src = lines;
+    icon.alt = 'Vertical lines'
+    home.appendChild(icon);
+
     // OKAY IM JUST GOING TO PLACE THE SIDE BAR BUTTONS LISTENER HERE LOL
     sideBar.querySelectorAll('button').forEach(button => {
       // if (button.id === 'add-button'){console.log(button.id)}
-      
+
       if (button.id !== 'add-button') {
         button.addEventListener('click', function () {
 
@@ -356,26 +364,6 @@ function dialogListenerHelper() {
     dialog.close();
     loadPage(true);
   });
-
-    // const radioButtons = dialog.querySelectorAll('input[type="radio"][name="priority"]');
-    // radioButtons.forEach(radioButton => {
-    //   console.log(radioButtons)
-    //     radioButton.addEventListener('change', function() {
-    //       console.log('ccc')
-    //         // Remove 'checked' class from all labels within the dialog
-    //         const rr = dialog.querySelectorAll('input[type="radio"][name="priority"]');
-    //         rr.forEach(label => {
-    //             rr.classList.remove('checked');
-    //         });
-
-    //         // Add 'checked' class to the selected label
-    //         if (this.checked) {
-    //           console.log('CCCC')
-    //             const label = this.parentElement.querySelector('label');
-    //             label.classList.add('checked');
-    //         }
-    //     });
-    // });
 
 
   // Optional: Close the dialog when clicking outside of it

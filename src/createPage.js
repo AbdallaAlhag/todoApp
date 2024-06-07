@@ -6,6 +6,7 @@ import { format,parseISO, differenceInDays, isValid  } from "date-fns";
 import { enUS } from 'date-fns/locale';
 import addImage from './img/add.png';
 import noteIcon from './img/notePad.svg'
+import { countTodo } from "./counter";
 
 
 function createPage(option) {
@@ -25,7 +26,9 @@ function createPage(option) {
     }
 
   });
+  
   return content_container;
+  
 }
 
 // Parent = grid, elment = todo object (which is the class we created) inside the array which we are looping through
@@ -140,13 +143,13 @@ function checkDate(option, curDay) {
   }
   const currentDay = parseISO(curDay)
   const today = new Date();
-  const diff = differenceInDays(today, currentDay)
+  const diff = differenceInDays(currentDay,today)
   if (option === 'today'){
     if (diff == 0){
       return true;
     }
   } else if (option === 'week'){
-    if (diff <= 7 && diff >= 0){
+    if (diff <= 7 && diff > 0){
       return true;
     }
   } else{
@@ -160,5 +163,6 @@ export function loadPage(option) {
   content.textContent = "";
   content.appendChild(createPage(option));
   todoListener();
+  countTodo();
 }
 

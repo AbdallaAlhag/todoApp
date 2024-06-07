@@ -118,6 +118,28 @@ button {
   width: 30px;
 }
 
+.date-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 75%;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px; /* Set to your desired size */
+  height: 25px; /* Set to your desired size */
+  margin-left: auto;
+  background-color: var(--primary-background);
+  border: 1px solid var(--primary-background);
+  border-radius: 50%;
+  color: white;
+  padding: 0; /* Remove padding to ensure the circle shape */
+  font-weight: bold;
+}
+
 .dialog-side-bar button .icon-img{
   height: 25px;
   width: 30px;
@@ -138,6 +160,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
+  width: 100%;
 }
 
 .topic {
@@ -351,7 +374,7 @@ textarea {
   grid-template-rows: 1fr;
   font-size: 16px;
   gap: 10px;
-  margin: 15px;
+  margin: 25px;
 }
 
 /* todo div stack */
