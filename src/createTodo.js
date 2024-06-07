@@ -1,10 +1,10 @@
 class todo{
-    constructor(title, description, dueDate, priority, tag='home'){
+    constructor(title, description, dueDate, priority, project='home'){
         this._title = title;
         this._description = description;
         this._dueDate = dueDate;
         this._priority = priority;
-        this._tag = tag;
+        this._project = project;
     }
 
     get title(){
@@ -23,8 +23,8 @@ class todo{
       return this._priority;
     }
 
-    get tag(){
-      return this._tag;
+    get project(){
+      return this._project;
     }
 
     set title(newTitle){
@@ -50,8 +50,8 @@ const arrayModule = (() => {
   
     return {
       getArray: () => myTodo,
-      addToArray: (title, description, dueDate, priority,tag) => {
-        const t1 = new todo(title,description, dueDate, priority,tag)
+      addToArray: (title, description, dueDate, priority,project) => {
+        const t1 = new todo(title,description, dueDate, priority,project)
         myTodo.push(t1);
       },
       remove: (index) => {

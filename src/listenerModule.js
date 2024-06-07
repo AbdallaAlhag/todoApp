@@ -3,6 +3,7 @@ import arrayModule from "./createTodo.js";
 import { loadPage } from './createPage.js'
 import noteModule from "./createNotes.js";
 import lines from './img/vertical-lines.png';
+import { createProject } from "./createProject.js";
 
 // Listens to the add botton 
 export function dialogListener() {
@@ -58,25 +59,7 @@ export function dialogListener() {
 
     });
 
-    //   submitButton.addEventListener('click', (event) => {
-    //     event.preventDefault(); // Prevent the form from submitting in the traditional way
-    //     formListener();
 
-    //     // Clear the form and close the dialog
-    //     document.querySelector('form').reset();
-    //     dialog.close();
-    //     loadPage(true);
-    //   });
-
-    //   // Optional: Close the dialog when clicking outside of it
-    //   dialog.addEventListener('click', (event) => {
-    //     const rect = dialog.getBoundingClientRect();
-    //     const isInDialog = event.clientX >= rect.left && event.clientX <= rect.right &&
-    //       event.clientY >= rect.top && event.clientY <= rect.bottom;
-    //     if (!isInDialog) {
-    //       dialog.close();
-    //     }
-    //   });
   });
 };
 
@@ -84,21 +67,42 @@ export function dialogListener() {
 export function formListener() {
   const dialog = document.querySelector('dialog');
   const form = document.querySelector('form');
+  
+  let priority = null;
+  if (dialog.querySelector('#form-priority')){
+    const priorityForm = dialog.querySelector('#form-priority');
+    const selectedPriority = priorityForm.querySelector('input[name="priority"]:checked');
+    priority = selectedPriority.id
+  }
+
+  const projectContainer = document.querySelector('.project-container');
+  const activeBtn = projectContainer.querySelector('.clicked');
+  console.log(activeBtn)
 
   const formData = new FormData(form);
   const title = formData.get('title');
   const description = formData.get('desc')
   const date = formData.get('date');
-  const priority = formData.get('priority');
 
   if (!date && !priority && title && description) {
     noteModule.addToArray(title, description);
-  } else if (date && priority && title && description) {
-    arrayModule.addToArray(title, description, date, priority);
+  } 
+  if (date && priority && title && description) {
+    if (activeBtn){
+      arrayModule.addToArray(title, description, date, priority, activeBtn.id);
+    }else{
+      arrayModule.addToArray(title, description, date, priority);
+    }
+  }
+  if (!date && !priority && !description && title){
+    createProject(title);
   }
 }
 
 function createDialog() {
+  if (document.getElementById('form-dialog')){
+    return
+  }
   // Create dialog
   const dialog = document.createElement('dialog');
   dialog.setAttribute('id', 'form-dialog');
@@ -124,7 +128,7 @@ function createDialog() {
   removeButton.textContent = 'X';
 
   removeButton.addEventListener('click', function () {
-    // detelete Note
+    // detelete Note`
     if (dialog.open) {
       dialog.close();
     }
@@ -136,9 +140,13 @@ function createDialog() {
   dialogSideBar.classList.add('dialog-side-bar');
 
   const todoButton = document.createElement('button');
-  dialogSideBar.classList.add('dialog-side-bar');
   todoButton.textContent = 'ToDo';
+  todoButton.classList.add('clicked');
   dialogSideBar.appendChild(todoButton);
+
+  const projectButton = document.createElement('button');
+  projectButton.textContent = 'Project';
+  dialogSideBar.appendChild(projectButton);
 
   const noteButton = document.createElement('button');
   noteButton.textContent = 'Note';
@@ -196,6 +204,52 @@ function createDialog() {
     createNoteDialogContent(dialog, form, dialogContainer, dialogContent, dialogHeader, dialogSideBar);
   });
 
+  projectButton.addEventListener('click', () =>{
+    while (form.firstChild){
+      form.removeChild(form.firstChild);
+    }
+    createProjectDialogContent(dialog, form, dialogContainer, dialogContent, dialogHeader, dialogSideBar);
+  })
+}
+
+// PROJECT DIALOG
+function createProjectDialogContent(dialog, form, dialogContainer, dialogContent, dialogHeader, dialogSideBar) {
+
+  // Title input
+  const titleDiv = document.createElement('div');
+  const titleLabel = document.createElement('label');
+  titleLabel.setAttribute('for', 'title');
+  const titleInput = document.createElement('input');
+  titleInput.setAttribute('type', 'text');
+  titleInput.setAttribute('id', 'title');
+  titleInput.setAttribute('placeholder', 'Title: Pay bills');
+  titleInput.setAttribute('name', 'title');
+  titleInput.required = true;
+  titleDiv.appendChild(titleLabel);
+  titleDiv.appendChild(titleInput);
+
+ 
+
+  // Submit button
+  const submitButton = document.createElement('button');
+  submitButton.classList.add('submit-button');
+  submitButton.setAttribute('id', 'submit-button');
+  submitButton.setAttribute('name', 'note');
+  submitButton.textContent = 'Create Project';
+
+  // Append elements
+  form.appendChild(titleDiv);
+  form.appendChild(submitButton);
+  dialogContent.appendChild(form)
+  dialogContainer.appendChild(dialogHeader);
+  dialogContainer.appendChild(dialogSideBar);
+  dialogContainer.appendChild(dialogContent);
+  // form.appendChild(dialogContainer);
+  dialog.appendChild(dialogContainer);
+
+  // Append dialog to body
+  document.body.appendChild(dialog);
+  dialogListenerHelper();
 }
 
 // Notes Dialog Content

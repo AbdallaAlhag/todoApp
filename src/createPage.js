@@ -2,18 +2,21 @@ import arrayModule from "./createTodo";
 import trash from "./img/trash.svg";
 import edit from "./img/edit.svg";
 import { todoListener } from "./todoListenerModule";
-import { format,parseISO, differenceInDays, isValid  } from "date-fns";
+import { format, parseISO, differenceInDays, isValid } from "date-fns";
 import { enUS } from 'date-fns/locale';
 import addImage from './img/add.png';
 import noteIcon from './img/notePad.svg'
 import { countTodo } from "./counter";
+import { loadNotePage } from "./createNotePage";
 
 
-function createPage(option) {
+function createPage(option = true, proj = 'home') {
   const content_container = document.createElement("div");
   content_container.classList.add("grid-container");
 
   const array = arrayModule.getArray();
+  console.log(array);
+  console.log(proj)
   array.forEach((element, index) => {
     // if condition to load base on what page we want
     const grid = document.createElement("div");
@@ -21,14 +24,21 @@ function createPage(option) {
     grid.setAttribute('index', index);
     createTodo(grid, element);
 
-    if (checkDate(option, element.dueDate)) {
+
+    // check proj here and create function for it
+    if (proj === 'home' || proj ==='today' || proj === 'week') {
+      if (checkDate(option, element.dueDate)) {
+        content_container.appendChild(grid);
+      }
+    }
+    else if (checkDate(option, element.dueDate) && proj === element.project) {
       content_container.appendChild(grid);
     }
 
   });
-  
+
   return content_container;
-  
+
 }
 
 // Parent = grid, elment = todo object (which is the class we created) inside the array which we are looping through
@@ -65,11 +75,9 @@ function createTodo(parent, element) {
             const formattedDate = format(date, "MMMM do", { locale: enUS });
             div.textContent = `${formattedDate}`;
           } else {
-            console.error('Invalid date:', element[key]);
             div.textContent = 'Invalid date';
           }
         } catch (error) {
-          console.error('Error parsing date:', error);
           div.textContent = 'Error parsing date';
         }
       } else {
@@ -129,7 +137,7 @@ function createHelper() {
 
 
   const addBtn = document.querySelector('#add-button-img');
-  addBtn.src = addImage;  
+  addBtn.src = addImage;
 
   const notePad = document.querySelector('#notepad-icon');
   notePad.src = noteIcon;
@@ -143,25 +151,37 @@ function checkDate(option, curDay) {
   }
   const currentDay = parseISO(curDay)
   const today = new Date();
-  const diff = differenceInDays(currentDay,today)
-  if (option === 'today'){
-    if (diff == 0){
+  const diff = differenceInDays(currentDay, today)
+  if (option === 'today') {
+    if (diff == 0) {
       return true;
     }
-  } else if (option === 'week'){
-    if (diff <= 7 && diff > 0){
+  } else if (option === 'week') {
+    if (diff <= 7 && diff > 0) {
       return true;
     }
-  } else{
+  } else {
     return false;
   }
 
 }
 
-export function loadPage(option) {
+export function loadPage(option, proj = 'home') {
+  const sideBar = document.querySelector('.side-bar');
+  const currentPage = document.querySelector('.clicked')
+  console.log(sideBar, currentPage);
   const content = document.getElementById("content");
   content.textContent = "";
-  content.appendChild(createPage(option));
+  if (currentPage) {
+    if (currentPage.id === 'notes-button') {
+      loadNotePage();
+    } else {
+      content.appendChild(createPage(option, currentPage.id));
+    }
+  } else {
+    content.appendChild(createPage(option, proj));
+  }
+
   todoListener();
   countTodo();
 }

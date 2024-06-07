@@ -47,8 +47,6 @@ function createNote(parent, element,index) {
             this.style.height = (this.scrollHeight) + 'px';
 
             const pa = document.getElementById(`note-grid-${index}`);
-            console.log(pa)
-            console.log(this.style.height)
             // pa.style.height = 'auto';
             pa.style.height = this.style.height + 'px';
         });

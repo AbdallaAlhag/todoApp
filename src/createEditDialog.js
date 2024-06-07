@@ -3,7 +3,8 @@ import { editFormListener } from './todoListenerModule'
 
 // arr = [todo class, todo class, ...etc]
 // so lets pass in that object class
-export function createDialog(todoObject) {
+// CREATE EDIT DIALOG
+export function createEditDialog(todoObject) {
     // Create the dialog element
     const formDialog = document.createElement("dialog");
     formDialog.setAttribute("id", "edit-dialog");
@@ -143,6 +144,6 @@ export function createDialog(todoObject) {
 
 }
 
-export function createNotesDialog(noteObj) {
-    console.log('todo');
-}
+// export function createNotesDialog(noteObj) {
+//     console.log('todo');
+// }

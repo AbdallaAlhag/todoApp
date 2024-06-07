@@ -26,7 +26,6 @@ export function countTodo() {
         countHome += 1;
         const date = parseISO(obj.dueDate);
         const diff = differenceInDays(date, currentDay);
-        console.log(`date: ${date}, difference: ${diff}`);
         if (diff === 0) {
             countToday += 1;
         }

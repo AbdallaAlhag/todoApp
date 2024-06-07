@@ -1,4 +1,4 @@
-import { createDialog } from "./createDialog";
+import { createEditDialog } from "./createEditDialog";
 import { loadPage } from "./createPage";
 import arrayModule from "./createTodo";
 import { parseISO, format, isValid } from 'date-fns';
@@ -105,7 +105,7 @@ function createEdit(grid) {
     const array = arrayModule.getArray();
     const gridIndex = grid.getAttribute("index");
     //   console.log(array[grid.index].title);
-    createDialog(array[gridIndex]);
+    createEditDialog(array[gridIndex]);
 
 
     // Optional: Close the dialog when clicking outside of it
@@ -114,16 +114,6 @@ function createEdit(grid) {
 
     // const submitButton = document.getElementsByClassName('submit-button');
     const submitButton = document.querySelector('#edit-submit-button');
-
-    // submitButton.addEventListener('click', (event) => {
-    //     event.preventDefault(); // Prevent the form from submitting in the traditional way
-    //     editFormListener(array[gridIndex])
-
-    //     // Clear the form and close the dialog
-    //     // document.querySelector('form').reset();
-    //     editDialog.close();
-    //     loadPage(true);
-    // });
 
     editDialog.addEventListener("click", (event) => {
         const rect = editDialog.getBoundingClientRect();

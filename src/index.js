@@ -5,6 +5,7 @@ import { createHome } from './home.js';
 import { createToday } from './today.js';
 import { createWeek } from './week.js';
 import { createNote } from './notes.js';
+import { createProject } from './createProject.js';
 
 arrayModule.addToArray('Complete Project', 'Finish the Odin Project task', '2024-06-06', 'Low');
 arrayModule.addToArray('Work on css', 'Add Icon', '2024-06-06', 'Medium');
@@ -24,6 +25,8 @@ noteModule.addToArray('Finish Project', 'Finish loading pages');
 // console.log('Hello World');
 // const today = new Date();
 // today = Fri May 31 2024 10:41:39 GMT-0700 (Pacific Daylight Time)
+
+createProject('abdalla');
 
 
 createHome();
@@ -56,5 +59,5 @@ weekBtn.addEventListener('click', function() {
 noteBtn.addEventListener('click', function() {
     buttons.forEach(btn => btn.classList.remove('active'));
     createNote();
-    weekBtn.classList.add('active');
+    noteBtn.classList.add('active');
 });
