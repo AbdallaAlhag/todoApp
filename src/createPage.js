@@ -70,7 +70,7 @@ function createTodo(parent, element) {
         try {
           const date = parseISO(element[key]);
           if (isValid(date)) {
-            const formattedDate = format(date, "MMMM do", { locale: enUS });
+            const formattedDate = format(date, "MMM do", { locale: enUS });
             div.textContent = `${formattedDate}`;
           } else {
             div.textContent = 'Invalid date';
