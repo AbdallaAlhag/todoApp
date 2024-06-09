@@ -1,4 +1,5 @@
 import noteModule from "./createNotes";
+import { createPage } from './createPage.js';
 
 function createNotePage() {
     const content_container = document.createElement("div");
@@ -10,7 +11,7 @@ function createNotePage() {
         grid.classList.add("note-grid");
         grid.setAttribute('id', `note-grid-${index}`)
         grid.setAttribute('index', index);
-        createNote(grid, element,index);
+        createNote(grid, element, index);
         content_container.appendChild(grid)
 
     });
@@ -18,7 +19,7 @@ function createNotePage() {
 }
 
 // Parent = grid, elment = notes object (which is the class we created) inside the array which we are looping through
-function createNote(parent, element,index) {
+function createNote(parent, element, index) {
 
     const removeButton = document.createElement('button');
     removeButton.setAttribute('id', 'exit-button');
@@ -28,7 +29,7 @@ function createNote(parent, element,index) {
         // detelete Note
         noteModule.remove(index)
         parent.remove();
-        console.log(noteModule.getArray())
+        localStorage.setItem('note', JSON.stringify(noteModule.getArray()));
     });
     parent.appendChild(removeButton);
 
@@ -39,10 +40,10 @@ function createNote(parent, element,index) {
         textarea.setAttribute('id', `textarea-${key}-${index}`);
         textarea.classList.add(`textarea-class-${key}-${index}`);
         textarea.value = element[key];
-        
+
         parent.appendChild(textarea);
 
-        textarea.addEventListener('input', function() {
+        textarea.addEventListener('input', function () {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
 
@@ -54,9 +55,10 @@ function createNote(parent, element,index) {
 }
 
 
-export function loadNotePage() {
+export function loadNotePage(option=true, proj = 'home') {
     const content = document.getElementById("content");
     content.textContent = "";
     content.appendChild(createNotePage());
+
 }
 

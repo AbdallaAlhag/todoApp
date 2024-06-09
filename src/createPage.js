@@ -10,13 +10,11 @@ import { countTodo } from "./counter";
 import { loadNotePage } from "./createNotePage";
 
 
-function createPage(option = true, proj = 'home') {
+export function createPage(option = true, proj = 'home') {
   const content_container = document.createElement("div");
   content_container.classList.add("grid-container");
 
   const array = arrayModule.getArray();
-  console.log(array);
-  console.log(proj)
   array.forEach((element, index) => {
     // if condition to load base on what page we want
     const grid = document.createElement("div");
@@ -50,7 +48,7 @@ function createTodo(parent, element) {
 
   for (const key in element) {
     // check if current propery belongs to our element instead of properties inherited from prototype chain
-    if (key == '_description' || key == '_priority') {
+    if (key === '_description' || key === '_priority' || key === '_project') {
       continue;
     }
     if (Object.prototype.hasOwnProperty.call(element, key)) {
@@ -166,22 +164,10 @@ function checkDate(option, curDay) {
 
 }
 
-export function loadPage(option, proj = 'home') {
-  const sideBar = document.querySelector('.side-bar');
-  const currentPage = document.querySelector('.clicked')
-  console.log(sideBar, currentPage);
+export function loadPage(option=true, proj = 'home') {
   const content = document.getElementById("content");
   content.textContent = "";
-  if (currentPage) {
-    if (currentPage.id === 'notes-button') {
-      loadNotePage();
-    } else {
-      content.appendChild(createPage(option, currentPage.id));
-    }
-  } else {
-    content.appendChild(createPage(option, proj));
-  }
-
+  content.appendChild(createPage(option, proj));
   todoListener();
   countTodo();
 }

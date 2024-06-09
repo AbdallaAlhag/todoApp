@@ -56,6 +56,11 @@ const arrayModule = (() => {
       },
       remove: (index) => {
         myTodo.splice(index,1);
+      },
+      clearAll: () => {
+        while (myTodo.length > 0){
+          myTodo.pop()
+        }
       }
     };
   })();

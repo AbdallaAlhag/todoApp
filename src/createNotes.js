@@ -33,6 +33,11 @@ const noteModule = (() => {
       },
       remove: (index) => {
         myNote.splice(index,1);
+      },
+      clearAll: () =>{
+        while (myNote.length > 0){
+          myNote.pop()
+        }
       }
     };
   })();

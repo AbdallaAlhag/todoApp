@@ -104,7 +104,6 @@ function createEdit(grid) {
 
     const array = arrayModule.getArray();
     const gridIndex = grid.getAttribute("index");
-    //   console.log(array[grid.index].title);
     createEditDialog(array[gridIndex]);
 
 
@@ -132,7 +131,15 @@ function createEdit(grid) {
 function removeGrid(grid) {
     const gridIndex = grid.getAttribute("index");
     arrayModule.remove(gridIndex);
-    loadPage(true);
+    localStorage.setItem('todo', JSON.stringify(arrayModule.getArray()));
+
+    const sideBar = document.querySelector('.side-bar');
+    const currentPage = sideBar.querySelector('.clicked')
+    if (currentPage) {
+        loadPage(undefined, currentPage.id);
+      } else {
+      loadPage(undefined, undefined);
+    }
 }
 
 export function editFormListener(todoObject) {
@@ -147,5 +154,12 @@ export function editFormListener(todoObject) {
     todoObject.dueDate = formData.get('date');
     todoObject.priority = selectedPriority.id;
 
-    loadPage(true);
+    localStorage.setItem('todo', JSON.stringify(arrayModule.getArray()));
+    const sideBar = document.querySelector('.side-bar');
+    const currentPage = sideBar.querySelector('.clicked')
+    if (currentPage) {
+        loadPage(undefined, currentPage.id);
+      }else {
+      loadPage(undefined, undefined);
+    }
 }

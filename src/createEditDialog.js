@@ -138,12 +138,10 @@ export function createEditDialog(todoObject) {
     formElement.addEventListener('submit', (event) => {
         event.preventDefault();
         editFormListener(todoObject);
+
+        
         formDialog.remove();
         formDialog.close();
     });
 
 }
-
-// export function createNotesDialog(noteObj) {
-//     console.log('todo');
-// }

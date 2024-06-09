@@ -4,6 +4,7 @@ import { loadPage } from './createPage.js'
 import noteModule from "./createNotes.js";
 import lines from './img/vertical-lines.png';
 import { createProject } from "./createProject.js";
+import { loadNotePage } from "./createNotePage.js";
 
 // Listens to the add botton 
 export function dialogListener() {
@@ -30,7 +31,6 @@ export function dialogListener() {
 
     // OKAY IM JUST GOING TO PLACE THE SIDE BAR BUTTONS LISTENER HERE LOL
     sideBar.querySelectorAll('button').forEach(button => {
-      // if (button.id === 'add-button'){console.log(button.id)}
 
       if (button.id !== 'add-button') {
         button.addEventListener('click', function () {
@@ -67,9 +67,9 @@ export function dialogListener() {
 export function formListener() {
   const dialog = document.querySelector('dialog');
   const form = document.querySelector('form');
-  
+
   let priority = null;
-  if (dialog.querySelector('#form-priority')){
+  if (dialog.querySelector('#form-priority')) {
     const priorityForm = dialog.querySelector('#form-priority');
     const selectedPriority = priorityForm.querySelector('input[name="priority"]:checked');
     priority = selectedPriority.id
@@ -77,7 +77,6 @@ export function formListener() {
 
   const projectContainer = document.querySelector('.project-container');
   const activeBtn = projectContainer.querySelector('.clicked');
-  console.log(activeBtn)
 
   const formData = new FormData(form);
   const title = formData.get('title');
@@ -86,21 +85,24 @@ export function formListener() {
 
   if (!date && !priority && title && description) {
     noteModule.addToArray(title, description);
-  } 
+    localStorage.setItem('note', JSON.stringify(noteModule.getArray()));
+  }
   if (date && priority && title && description) {
-    if (activeBtn){
+    if (activeBtn) {
       arrayModule.addToArray(title, description, date, priority, activeBtn.id);
-    }else{
+      localStorage.setItem('todo', JSON.stringify(arrayModule.getArray()));
+    } else {
       arrayModule.addToArray(title, description, date, priority);
+      localStorage.setItem('todo', JSON.stringify(arrayModule.getArray()));
     }
   }
-  if (!date && !priority && !description && title){
+  if (!date && !priority && !description && title) {
     createProject(title);
   }
 }
 
 function createDialog() {
-  if (document.getElementById('form-dialog')){
+  if (document.getElementById('form-dialog')) {
     return
   }
   // Create dialog
@@ -204,8 +206,8 @@ function createDialog() {
     createNoteDialogContent(dialog, form, dialogContainer, dialogContent, dialogHeader, dialogSideBar);
   });
 
-  projectButton.addEventListener('click', () =>{
-    while (form.firstChild){
+  projectButton.addEventListener('click', () => {
+    while (form.firstChild) {
       form.removeChild(form.firstChild);
     }
     createProjectDialogContent(dialog, form, dialogContainer, dialogContent, dialogHeader, dialogSideBar);
@@ -228,7 +230,7 @@ function createProjectDialogContent(dialog, form, dialogContainer, dialogContent
   titleDiv.appendChild(titleLabel);
   titleDiv.appendChild(titleInput);
 
- 
+
 
   // Submit button
   const submitButton = document.createElement('button');
@@ -416,7 +418,51 @@ function dialogListenerHelper() {
     // Clear the form and close the dialog
     document.querySelector('form').reset();
     dialog.close();
-    loadPage(true);
+
+    const sideBar = document.querySelector('.side-bar');
+    const currentPage = sideBar.querySelector('.clicked')
+    if (currentPage) {
+      if (currentPage.id === 'notes-button') {
+        loadNotePage();
+      } else {
+        loadPage(undefined, currentPage.id);
+      }
+    } else {
+      loadPage(undefined, undefined);
+    }
+
+    // loadPage(true);
+
+     // OKAY IM JUST GOING TO PLACE THE SIDE BAR BUTTONS LISTENER HERE LOL
+     sideBar.querySelectorAll('button').forEach(button => {
+
+      if (button.id !== 'add-button') {
+        button.addEventListener('click', function () {
+
+          sideBar.querySelectorAll('button').forEach(btn => {
+            if (btn.id !== 'add-button') {
+              btn.classList.remove('clicked');
+              const icon = btn.querySelector('img');
+              if (icon) {
+                icon.remove();
+              }
+            }
+
+          });
+
+          this.classList.toggle('clicked');
+          if (!this.querySelector('img')) {
+            const icon = document.createElement('img');
+            icon.classList.add('icon-img');
+            icon.src = lines;
+            icon.alt = 'Vertical lines'
+            this.appendChild(icon);
+          }
+        });
+      }
+
+    });
+    
   });
 
 
