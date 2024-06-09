@@ -9,15 +9,15 @@ Persistence is ensured through localStorage, allowing users to retain their task
 
 The project is licensed under the MIT license, promoting collaboration and community contributions.
 
+## Screenshots
+
+![App Screenshot](https://snipboard.io/f9GAMD.jpg)
+
+![App Screenshot](https://snipboard.io/k0VcbE.jpg)
+
+![App Screenshot](https://snipboard.io/LPCX3l.jpg)
 
 
-
-
-
-
-## Demo
-
-[abdallaalhag.github.io/todoApp/](abdallaalhag.github.io/todoApp/)
 
 ## Run Locally
 
@@ -47,13 +47,6 @@ Build Deployment
 ```bash
   npm run build
 ```
-## Screenshots
-
-![App Screenshot](https://snipboard.io/f9GAMD.jpg)
-
-![App Screenshot](https://snipboard.io/k0VcbE.jpg)
-
-![App Screenshot](https://snipboard.io/LPCX3l.jpg)
 
 ## License
 
