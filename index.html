@@ -6,7 +6,32 @@
     <title>Todo App</title>
   </head>
   <body>
-    <p>Hello WWW</p>
+    <div class="container">
+      <div class="header">
+        <h1>// TO-DO</h1>
+        <img id="notepad-icon" alt="notepad icon" />
+      </div>
+      <div class="side-bar">
+        <nav class="date">
+          <div class="date-container" id="home-container">
+            <button class="side-bar-button" id="home">Home</button>
+          </div>
+          <div class="date-container" id="today-container">
+            <button class="side-bar-button" id="today">Today</button>
+          </div>
+          <div class="date-container" id="week-container">
+            <button class="side-bar-button" id="week">Week</button>
+          </div>
+        </nav>
+        <h1>Project</h1>
+        <nav class="project-container"></nav>
+        <button id="notes-button">Notes</button>
+        <button id="add-button">
+          <img id="add-button-img" alt="Add Button" />
+        </button>
+      </div>
+      <div id="content"></div>
+    </div>
     <script defer="defer" src="runtime.bundle.js"></script>
     <script defer="defer" src="main.bundle.js"></script>
   </body>
