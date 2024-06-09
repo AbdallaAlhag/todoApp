@@ -72,7 +72,9 @@ export function formListener() {
   if (dialog.querySelector('#form-priority')) {
     const priorityForm = dialog.querySelector('#form-priority');
     const selectedPriority = priorityForm.querySelector('input[name="priority"]:checked');
-    priority = selectedPriority.id
+    if (selectedPriority){
+      priority = selectedPriority.id
+    }
   }
 
   const projectContainer = document.querySelector('.project-container');
@@ -371,7 +373,8 @@ function createTodoDialogContent(dialog, form, dialogContainer, dialogContent, d
     input.setAttribute('id', priority.id);
     input.setAttribute('name', 'priority');
     input.setAttribute('value', priority.value);
-    if (priority.id === 'Low') input.required = true;
+    input.required = true; // Apply required attribute to each radio input
+
 
     div.appendChild(input);
     div.appendChild(label)

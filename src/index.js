@@ -14,7 +14,7 @@ if (storedData.length === 0) {
     arrayModule.addToArray('Grocery Shopping', 'Buy groceries for the week', '2024-06-08', 'Medium');
     arrayModule.addToArray('Doctor Appointment', 'Visit Dr. Smith for a check-up', '2024-06-10', 'High');
     arrayModule.addToArray('Read Book', 'Finish reading "Atomic Habits"', '2024-06-12', 'Low');
-    arrayModule.addToArray('Workout', 'Go to the gym for a workout session', '2024-06-07', 'High');
+    arrayModule.addToArray('Workout', 'Go to the gym for a workout session', '2024-06-07', 'High', 'Gym');
 }
 
 const storedData2 = JSON.parse(localStorage.getItem('note'));
