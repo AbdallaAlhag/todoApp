@@ -13,6 +13,12 @@ import { loadNotePage } from "./createNotePage";
 export function createPage(option = true, proj = 'home') {
   const content_container = document.createElement("div");
   content_container.classList.add("grid-container");
+  
+  const addBtn = document.querySelector('#add-button-img');
+  addBtn.src = addImage;
+
+  const notePad = document.querySelector('#notepad-icon');
+  notePad.src = noteIcon;
 
   const array = arrayModule.getArray();
   array.forEach((element, index) => {
@@ -133,12 +139,6 @@ function createHelper() {
   const label = document.createElement("label");
   label.htmlFor = "myCheckbox"; // Set the 'for' attribute to match the checkbox's ID
 
-
-  const addBtn = document.querySelector('#add-button-img');
-  addBtn.src = addImage;
-
-  const notePad = document.querySelector('#notepad-icon');
-  notePad.src = noteIcon;
 
   return { checkbox, label, detailButton, editButton, removeButton };
 }

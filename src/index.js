@@ -7,25 +7,24 @@ import { createWeek } from './week.js';
 import { createNote } from './notes.js';
 import { createProject } from './createProject.js';
 
-
-
-arrayModule.addToArray('Complete Project', 'Finish the Project task', '2024-06-06', 'Low');
-arrayModule.addToArray('Grocery Shopping', 'Buy groceries for the week', '2024-06-08', 'Medium');
-arrayModule.addToArray('Doctor Appointment', 'Visit Dr. Smith for a check-up', '2024-06-10', 'High');
-arrayModule.addToArray('Read Book', 'Finish reading "Atomic Habits"', '2024-06-12', 'Low');
-arrayModule.addToArray('Workout', 'Go to the gym for a workout session', '2024-06-07', 'High');
-
-noteModule.addToArray('Meeting Notes', 'Discuss project milestones and deadlines');
-noteModule.addToArray('Vacation Plan', 'Plan itinerary for the upcoming vacation');
-noteModule.addToArray('Recipe', 'Ingredients and steps for making a chocolate cake');
-noteModule.addToArray('Birthday Gift Ideas', "List of potential gifts for John's birthday");
-noteModule.addToArray('Weekly Goals', 'Set and review goals for the upcoming week');
-
-
 loadLocalStorage();
+const storedData = JSON.parse(localStorage.getItem('todo'));
+if (storedData.length === 0) {
+    arrayModule.addToArray('Complete Project', 'Finish the Project task', '2024-06-06', 'Low');
+    arrayModule.addToArray('Grocery Shopping', 'Buy groceries for the week', '2024-06-08', 'Medium');
+    arrayModule.addToArray('Doctor Appointment', 'Visit Dr. Smith for a check-up', '2024-06-10', 'High');
+    arrayModule.addToArray('Read Book', 'Finish reading "Atomic Habits"', '2024-06-12', 'Low');
+    arrayModule.addToArray('Workout', 'Go to the gym for a workout session', '2024-06-07', 'High');
+}
 
-
-
+const storedData2 = JSON.parse(localStorage.getItem('note'));
+if (storedData2.length === 0) {
+    noteModule.addToArray('Meeting Notes', 'Discuss project milestones and deadlines');
+    noteModule.addToArray('Vacation Plan', 'Plan itinerary for the upcoming vacation');
+    noteModule.addToArray('Recipe', 'Ingredients and steps for making a chocolate cake');
+    noteModule.addToArray('Birthday Gift Ideas', "List of potential gifts for John's birthday");
+    noteModule.addToArray('Weekly Goals', 'Set and review goals for the upcoming week');
+}
 
 createProject('Gym');
 
@@ -69,11 +68,9 @@ function loadLocalStorage() {
 
     // Grab local storage for the todos
     let todoArray = localStorage.getItem('todo') ?
-    JSON.parse(localStorage.getItem('todo')) : [];
-    console.log(todoArray)
+        JSON.parse(localStorage.getItem('todo')) : [];
 
     arrayModule.clearAll();
-    console.log('Cleared Array: ',arrayModule.getArray())
     // turn locoal storage into todo class
     todoArray.forEach(todo => {
         const title = todo._title;
@@ -85,18 +82,13 @@ function loadLocalStorage() {
         arrayModule.addToArray(title, description, dueDate, priority, project);
     });
 
-    // 
-    // const intialTodoArray = arrayModule.getArray();
-    // console.log('our array', intialTodoArray);
 
     localStorage.setItem('todo', JSON.stringify(arrayModule.getArray()));
-    console.log(localStorage);
 
 
     // NOTES SECTION
     let noteArray = localStorage.getItem('note') ?
-    JSON.parse(localStorage.getItem('note')) : [];
-    console.log(todoArray)
+        JSON.parse(localStorage.getItem('note')) : [];
 
     noteModule.clearAll();
     // turn locoal storage into todo class
@@ -107,21 +99,9 @@ function loadLocalStorage() {
         noteModule.addToArray(title, description);
     });
 
-    // 
-    // const intialTodoArray = arrayModule.getArray();
-    // console.log('our array', intialTodoArray);
+
 
     localStorage.setItem('note', JSON.stringify(noteModule.getArray()));
-    console.log(localStorage);
 
 }
 
-// export function addLocalStorage(option) {
-//     if (option === 'todo') {
-//         const intialTodoArray = arrayModule.getArray();
-//         localStorage.setItem('todo', JSON.stringify(intialTodoArray));
-//     } else {
-//         const intialNoteArray = arrayModule.getArray();
-//         localStorage.setItem('note', JSON.stringify(intialNoteArray));
-//     }
-// }
